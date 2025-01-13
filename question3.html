@@ -9,7 +9,60 @@
     
 
     <script>
-        // Faltou exemplo do corpo do Json na pergunta
+        // Pegando valor do json
+        let aux = [];
+        const lista = fetch('/dados.json') // Substitua pelo caminho do arquivo JSON
+        .then(response => {
+            if (!response.ok) {
+            throw new Error(`Erro na requisição: ${response.status}`);
+            }
+            return response.json(); // Converte para JSON
+        })
+        .then(data => {
+            aux.push(data);
+            console.log(data); // Faz algo com os dados
+
+            const faturamentos = data.map(faturamento => faturamento.valor)
+
+            // Maior Faturamento
+            const maiorValor = Math.max(...faturamentos)
+            console.log("Maior faturamento: "+maiorValor)
+            
+
+            //Menor Faturamento
+            const menorValor = Math.min(...faturamentos)
+            console.log("Menor Faturamento: "+menorValor)
+
+            //Quantidade de itens no array
+            const quantidadeObjetos = data.filter(item => typeof item === 'object').length;
+            console.log("Quantidade de objetos no array: "+quantidadeObjetos);
+
+            // Somando faturamento
+            const valores = data.map(aux => aux.valor); // Cria um array com os preços
+            const somaFatura = valores.reduce((soma, val) => soma + val, 0);
+            console.log("Soma do faturamento: "+ somaFatura);
+
+            let mediaFaturamento = somaFatura/quantidadeObjetos
+            console.log(`Media de faturamento ${mediaFaturamento}`)
+
+            let dia = 0;
+
+            //Dias que o faturamento foi menor que a média
+            for(let i = 0; i < faturamentos.length; i++){
+                if(faturamentos[i] < mediaFaturamento){
+                    dia++;
+                }
+            }
+
+            console.log(`dias que o faturamento foi menor que a média: ${dia}`)
+            
+        })
+        .catch(error => {
+            console.error('Erro ao buscar o JSON:', error);
+        });
+
+
+
     </script>
 </body>
 </html>
