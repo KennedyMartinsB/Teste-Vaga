@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title></title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="">
+    </head>
+    <body>
+        
+        <script>
+            // const num = parseInt(prompt('Enter a positive number: '));
+            let numSequencial = 10;
+            let n1 = 0, n2 = 1, soma;
+            let fib = [n1, n2]
+
+            for(let i = 2; i < numSequencial; i++){
+                soma = n1+n2
+                n1 = n2
+                n2 = soma
+                fib.push(soma);
+
+                // console.log("Posição do vetor: "+fib[i])
+            }
+
+            // console.log(fib)
+
+            const numComp = parseInt(prompt('Veja se o numero faz parte da sequencia: '));
+
+            for(let k = 0; k < fib.length; k++){
+                if(fib[k] == numComp){
+                    // alert(`O numero ${numComp} faz parte da sequência`)
+                    console.log(`O numero ${numComp} faz parte da sequência`)
+                    console.log(fib)
+                }
+            }
+            
+        </script>
+    </body>
+</html>
